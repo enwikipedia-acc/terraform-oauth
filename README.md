@@ -3,6 +3,13 @@ English Wikipedia ACC provisioning
 
 Note: This code is not designed for Production use; currently this is **ENTIRELY** experimental.
 
+### Required prerequisite knowledge for using this repository
+* Terraform (and Terraform Cloud)
+* Ansible
+* Wikimedia Cloud Services
+* Blue-green deployment
+
+
 ### Setting up OAuth from scratch
 
 If you're doing this from scratch, the playbook that's run to set up the instance should configure a fully-working MediaWiki instance you can use. Default credentials:
@@ -11,51 +18,16 @@ If you're doing this from scratch, the playbook that's run to set up the instanc
 
 ### WMCS deployment
 
-You can't use Terraform, so you'll have to do this manually.
+All of the "important" code to deploy this is stored in the module enwikipedia-acc/terraform-openstack-mediawiki-oauth.
 
-1. Shutoff the old instance and detach the cinder volumes.
-2. Create a new instance with the settings below. If you're nervous about being able to complete the next two steps quickly, drop the `acc-provision` line from near the bottom of the userdata.
-3. Attach the cinder volumes to the new instance
-4. Create instance metadata called "publicdns" with value "accounts-oauth.wmflabs.org"
-5. Update novaproxy to point to the new instance
-6. Log into the box 
-7. Check /var/log/cloud-init-output.log to make sure everything finished successfully. You should see "Cloud-init finished"
-8. Run `acc-provision` if it wasn't run by userdata already.
+This repository defines two instances of that module - one is normally configured as count=0, the other is count=1.
 
-Instance settings:
-   * Name: accounts-mwoauthX
-   * SecGroups: web, default
-   * Flavour: g3.cores1.ram2.disk20
-   * UserData: use the file `./userdata/oauth/userdata.sh` file.
+To upgrade:
+* Take snapshots of the app and db disks on Horizon.
+* Update the module versions, image snapshot names, etc as appropriate, and set count=1 for the module which is *not* active.
+* Commit the change, and make sure it's merged into master. Apply the change via TF Cloud.
+* The instance should provision automatically via Ansible. Check the instance logs on Horizon or check /var/log/cloud-init-output.log to make sure everything finished successfully. You should see "Cloud-init finished". If it's failed, log into the instance and run the command `acc-provision` to force it to run again.
+* On the instance, manually sort out things like MySQL replication from the old instance to the new instance, cut over the mysql config to the new instance.
+* Update the proxy config in this TF module to point to the new module. Commit/Push/Merge/Apply again.
+* Deactivate the old module by setting count=0 to save resources. Commit/Push/Merge/Apply again.
 
-## Application
-
-### Provisioning database
-
-1. Create the Cinder volumes
-2. Create a new instance with the settings below. If you're nervous about being able to complete the next two steps quickly, drop the `acc-provision` line from near the bottom of the userdata.
-3. Attach the cinder volumes to the new instance. Attach db disk first, then backup disk
-6. Log into the box 
-7. Check /var/log/cloud-init-output.log to make sure everything finished successfully. You should see "Cloud-init finished"
-8. Run `acc-provision` if it wasn't run by userdata already.
-
-Instance settings:
-   * Name: accounts-dbX
-   * SecGroups: database, default
-   * Flavour: g3.cores1.ram2.disk20
-   * UserData: use the file `./userdata/app/db-userdata.sh` file.
-
-### Provisioning application
-
-1. Create the Cinder volume
-2. Create a new instance with the settings below. If you're nervous about being able to complete the next two steps quickly, drop the `acc-provision` line from near the bottom of the userdata.
-3. Attach the cinder volume to the new instance.
-6. Log into the box 
-7. Check /var/log/cloud-init-output.log to make sure everything finished successfully. You should see "Cloud-init finished"
-8. Run `acc-provision` if it wasn't run by userdata already.
-
-Instance settings:
-   * Name: accounts-appserverX
-   * SecGroups: database, default
-   * Flavour: g3.cores1.ram2.disk20
-   * UserData: use the file `./userdata/app/app-userdata.sh` file.
