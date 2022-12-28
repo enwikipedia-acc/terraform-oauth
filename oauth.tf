@@ -1,8 +1,10 @@
 
 resource "cloudvps_web_proxy" "oauth_proxy" {
+  count = min(0, length(local.oauth_endpoints))
   hostname = local.oauth_proxy_hostname
   domain   = var.oauth_proxy_domain
-  backends = ["http://${module.oauth-server-blue[0].instance_ipv4}:80"]
+  backends = local.oauth_endpoints[0]
+
 }
 
 module "oauth-server-blue" {
@@ -10,7 +12,7 @@ module "oauth-server-blue" {
   version = "0.2.0"
 
   environment = "b"
-  count       = 1
+  count       = 0
 
   app_snapshot_name      = "oauth-www-20220829"
   database_snapshot_name = "oauth-db-20220829"
