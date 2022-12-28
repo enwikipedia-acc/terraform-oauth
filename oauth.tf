@@ -3,7 +3,7 @@ resource "cloudvps_web_proxy" "oauth_proxy" {
   count    = min(1, length(local.oauth_endpoints))
   hostname = local.oauth_proxy_hostname
   domain   = var.oauth_proxy_domain
-  backends = local.oauth_endpoints[0]
+  backends = [local.oauth_endpoints[0]]
 }
 
 module "oauth-server-blue" {
