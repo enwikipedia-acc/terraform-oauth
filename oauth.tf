@@ -31,17 +31,17 @@ module "oauth-server-blue" {
 
 module "oauth-server-green" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.7.0"
+  version = "0.8.0"
 
   environment = "g"
   count       = 1
 
-  # app_snapshot_name      = ""
   database_snapshot_name = "oauth-db-20221228b"
 
   instance_type = data.openstack_compute_flavor_v2.small.id
   image_name    = "debian-11.0-bullseye"
   network       = data.openstack_networking_network_v2.network.id
+  dns_zone_id   = data.openstack_dns_zone_v2.rootzone.id
 
   security_groups = [
     openstack_networking_secgroup_v2.oauth.name,
