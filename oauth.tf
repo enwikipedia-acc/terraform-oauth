@@ -21,7 +21,8 @@ module "oauth-server-blue" {
   network       = data.openstack_networking_network_v2.network.id
 
   security_groups = [
-    openstack_networking_secgroup_v2.oauth.name
+    openstack_networking_secgroup_v2.oauth.name,
+    data.openstack_networking_secgroup_v2.default.name,
   ]
 
   proxy_domain    = var.oauth_proxy_domain
@@ -44,7 +45,8 @@ module "oauth-server-green" {
   network       = data.openstack_networking_network_v2.network.id
 
   security_groups = [
-    openstack_networking_secgroup_v2.oauth.name
+    openstack_networking_secgroup_v2.oauth.name,
+    data.openstack_networking_secgroup_v2.default.name,
   ]
 
   proxy_domain    = var.oauth_proxy_domain
