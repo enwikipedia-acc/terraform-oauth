@@ -11,7 +11,7 @@ module "oauth-server-blue" {
   version = "0.7.0"
 
   environment = "b"
-  count       = 1
+  count       = 0
 
   database_snapshot_name = "oauth-db-20221228b"
 
@@ -31,10 +31,10 @@ module "oauth-server-blue" {
 
 module "oauth-server-green" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.5.0"
+  version = "0.7.0"
 
   environment = "g"
-  count       = 0
+  count       = 1
 
   # app_snapshot_name      = ""
   database_snapshot_name = "oauth-db-20221228b"
