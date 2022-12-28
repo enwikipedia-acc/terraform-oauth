@@ -10,7 +10,7 @@ module "oauth-server-blue" {
   version = "0.2.0"
 
   environment = "b"
-  count       = 1
+  count       = 0
 
   app_snapshot_name      = "oauth-www-20220829"
   database_snapshot_name = "oauth-db-20220829"
@@ -34,7 +34,7 @@ module "oauth-server-green" {
   version = "0.2.0"
 
   environment = "g"
-  count       = 0
+  count       = 1
 
   # app_snapshot_name      = ""
   # database_snapshot_name = ""
