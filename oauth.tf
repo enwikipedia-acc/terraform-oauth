@@ -1,6 +1,6 @@
 
 resource "cloudvps_web_proxy" "oauth_proxy" {
-  count = min(0, length(local.oauth_endpoints))
+  count    = min(0, length(local.oauth_endpoints))
   hostname = local.oauth_proxy_hostname
   domain   = var.oauth_proxy_domain
   backends = local.oauth_endpoints[0]
@@ -9,18 +9,17 @@ resource "cloudvps_web_proxy" "oauth_proxy" {
 
 module "oauth-server-blue" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.2.0"
+  version = "0.5.0"
 
   environment = "b"
-  count       = 0
+  count       = 1
 
-  app_snapshot_name      = "oauth-www-20220829"
-  database_snapshot_name = "oauth-db-20220829"
+  # app_snapshot_name      = "oauth-www-20220829"
+  database_snapshot_name = "oauth-db-20221228"
 
   instance_type = data.openstack_compute_flavor_v2.small.id
-  image_id      = data.openstack_images_image_v2.bullseye.id
+  image_name    = "debian-11.0-bullseye"
   network       = data.openstack_networking_network_v2.network.id
-  user_data     = file("${path.module}/userdata.sh")
 
   security_groups = [
     openstack_networking_secgroup_v2.oauth.name
@@ -33,7 +32,7 @@ module "oauth-server-blue" {
 
 module "oauth-server-green" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.2.0"
+  version = "0.5.0"
 
   environment = "g"
   count       = 0
@@ -42,9 +41,8 @@ module "oauth-server-green" {
   # database_snapshot_name = ""
 
   instance_type = data.openstack_compute_flavor_v2.small.id
-  image_id      = data.openstack_images_image_v2.bullseye.id
+  image_name    = "debian-11.0-bullseye"
   network       = data.openstack_networking_network_v2.network.id
-  user_data     = file("${path.module}/userdata.sh")
 
   security_groups = [
     openstack_networking_secgroup_v2.oauth.name
