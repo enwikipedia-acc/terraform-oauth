@@ -14,7 +14,7 @@ module "oauth-server-blue" {
   count       = 1
 
   # app_snapshot_name      = "oauth-www-20220829"
-  database_snapshot_name = "oauth-db-20221228"
+  database_snapshot_name = "oauth-db-20221228b"
 
   instance_type = data.openstack_compute_flavor_v2.small.id
   image_name    = "debian-11.0-bullseye"
