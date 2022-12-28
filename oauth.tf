@@ -8,7 +8,7 @@ resource "cloudvps_web_proxy" "oauth_proxy" {
 
 module "oauth-server-blue" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.5.0"
+  version = "0.6.0"
 
   environment = "b"
   count       = 1
@@ -32,7 +32,7 @@ module "oauth-server-blue" {
 
 module "oauth-server-green" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.5.0"
+  version = "0.6.0"
 
   environment = "g"
   count       = 0
