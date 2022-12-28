@@ -11,3 +11,6 @@ data "openstack_networking_network_v2" "network" {
 data "openstack_networking_secgroup_v2" "default" {
   name = "default"
 }
+
+data "openstack_dns_zone_v2" "rootzone" {
+}
