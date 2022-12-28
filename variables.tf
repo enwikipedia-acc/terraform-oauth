@@ -33,4 +33,7 @@ variable "oauth_proxy_domain" {
 
 locals {
   oauth_proxy_hostname = "${var.resource_prefix}-${var.oauth_proxy_name}"
+  oauth_endpoints = [for ip in concat(module.oauth-server-blue.*.instance_ipv4, module.oauth-server-green.*.instance_ipv4) : "http://${ip}:80"]
 }
+
+
