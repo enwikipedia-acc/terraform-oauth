@@ -8,10 +8,10 @@ resource "cloudvps_web_proxy" "oauth_proxy" {
 
 module "oauth-server-blue" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.6.0"
+  version = "0.5.0"
 
   environment = "b"
-  count       = 1
+  count       = 0
 
   # app_snapshot_name      = "oauth-www-20220829"
   database_snapshot_name = "oauth-db-20221228b"
@@ -32,13 +32,13 @@ module "oauth-server-blue" {
 
 module "oauth-server-green" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.6.0"
+  version = "0.5.0"
 
   environment = "g"
-  count       = 0
+  count       = 1
 
   # app_snapshot_name      = ""
-  # database_snapshot_name = ""
+  database_snapshot_name = "oauth-db-20221228b"
 
   instance_type = data.openstack_compute_flavor_v2.small.id
   image_name    = "debian-11.0-bullseye"
