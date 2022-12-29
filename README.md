@@ -29,7 +29,7 @@ To upgrade:
 4. Commit the change, create a pull request. Terraform Cloud will automatically run a plan, and set the status check on the commit once the plan been run.
 5. Check the plan on Terraform Cloud does what you expect. If it does, merge the PR. Terraform Cloud will automatically apply the changes to WMCS.
 6. The instance should provision automatically via Ansible. Check the instance logs on Horizon or check /var/log/cloud-init-output.log to make sure everything finished successfully. You should see "Cloud-init finished". If it's failed, log into the instance and run the command `acc-provision` to force it to run again.
-7. Check the staging environment is working as you'd expect
+7. Check the staging environment is working as you'd expect.
 8. Swap the prod/staging enviroments in `environments.auto.tfvars`. Repeat steps 4 and 5.
 9. Check the new instance is working well.
 10. Deactivate the old prod module by setting the staging environment to null in `environments.auto.tfvars`. You may want to sync the settings between the two environments while you're at it. Repeat steps 4 and 5 again.
