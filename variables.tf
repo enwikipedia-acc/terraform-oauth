@@ -33,11 +33,6 @@ variable "oauth_staging_proxy_name" {
 
 variable "oauth_proxy_domain" {
   type    = string
-  default = "wmflabs.org"
-}
-
-variable "oauth_staging_proxy_domain" {
-  type    = string
   default = "wmcloud.org"
 }
 
