@@ -36,6 +36,11 @@ variable "oauth_proxy_domain" {
   default = "wmflabs.org"
 }
 
+variable "oauth_staging_proxy_domain" {
+  type    = string
+  default = "wmcloud.org"
+}
+
 locals {
   oauth_proxy_hostname         = "${var.resource_prefix}-${var.oauth_proxy_name}"
   oauth_staging_proxy_hostname = "${var.resource_prefix}-${var.oauth_staging_proxy_name}"

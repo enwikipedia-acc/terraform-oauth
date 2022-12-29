@@ -7,7 +7,7 @@ resource "cloudvps_web_proxy" "oauth_proxy" {
 resource "cloudvps_web_proxy" "staging_oauth_proxy" {
   count    = var.staging_instance != null ? 1 : 0
   hostname = local.oauth_staging_proxy_hostname
-  domain   = var.oauth_proxy_domain
+  domain   = var.oauth_staging_proxy_domain
   backends = ["http://${trimsuffix(local.staging_env, ".")}:80"]
 }
 
