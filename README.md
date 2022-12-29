@@ -20,15 +20,17 @@ If you're doing this from scratch, the playbook that's run to set up the instanc
 
 All of the "important" code to deploy this is stored in the module enwikipedia-acc/terraform-openstack-mediawiki-oauth.
 
-This repository defines two instances of that module - one is normally configured as count=0, the other is count=1.
+This repository defines two instances of that module - one for each of the blue/green environments
 
 To upgrade:
-* Take snapshots of the app and db disks on Horizon.
-* Update the module versions, image snapshot names, etc as appropriate, and set count=1 for the module which is *not* active.
-* Commit the change, create a pull request. Terraform Cloud will automatically run a plan, and set the status check on the commit once the plan been run.
-* Check the plan on Terraform Cloud does what you expect. If it does, merge the PR. Terraform Cloud will automatically apply the changes to WMCS.
-* The instance should provision automatically via Ansible. Check the instance logs on Horizon or check /var/log/cloud-init-output.log to make sure everything finished successfully. You should see "Cloud-init finished". If it's failed, log into the instance and run the command `acc-provision` to force it to run again.
-* On the instance, manually sort out things like MySQL replication from the old instance to the new instance, cut over the mysql config to the new instance.
-* Update the proxy config in this TF module to point to the new module. Commit/Push/Merge/Apply again.
-* Deactivate the old module by setting count=0 to save resources. Commit/Push/Merge/Apply again.
+1. Take snapshots of the db disk on Horizon. You may want to shut down MariaDB while you do this.
+2. Check which environment is active in environments.auto.tfvars. Set the staging environment to the other environment.
+3. Update the image snapshot name for the module which is *not* active. Update any other attributes as needed (for example, module versions, image names, etc)
+4. Commit the change, create a pull request. Terraform Cloud will automatically run a plan, and set the status check on the commit once the plan been run.
+5. Check the plan on Terraform Cloud does what you expect. If it does, merge the PR. Terraform Cloud will automatically apply the changes to WMCS.
+6. The instance should provision automatically via Ansible. Check the instance logs on Horizon or check /var/log/cloud-init-output.log to make sure everything finished successfully. You should see "Cloud-init finished". If it's failed, log into the instance and run the command `acc-provision` to force it to run again.
+7. Check the staging environment is working as you'd expect
+8. Swap the prod/staging enviroments in `environments.auto.tfvars`. Repeat steps 4 and 5.
+9. Check the new instance is working well.
+10. Deactivate the old prod module by setting the staging environment to null in `environments.auto.tfvars`. You may want to sync the settings between the two environments while you're at it. Repeat steps 4 and 5 again.
 
