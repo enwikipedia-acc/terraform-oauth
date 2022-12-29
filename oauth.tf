@@ -14,7 +14,7 @@ resource "cloudvps_web_proxy" "staging_oauth_proxy" {
 
 module "oauth-server-blue" {
   source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.10.0"
+  version = "0.11.0"
 
   environment = "b"
   count       = var.live_instance == "blue" || var.staging_instance == "blue" ? 1 : 0
