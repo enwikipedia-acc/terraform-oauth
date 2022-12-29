@@ -24,7 +24,7 @@ module "bluegreen" {
   version = "0.2.0"
 
   blue_dns_name       = "${local.blue_resource_prefix}.${data.openstack_dns_zone_v2.rootzone.name}"
-  green_dns_name      = "${local.blue_resource_prefix}.${data.openstack_dns_zone_v2.rootzone.name}"
+  green_dns_name      = "${local.green_resource_prefix}.${data.openstack_dns_zone_v2.rootzone.name}"
   live_environment    = var.live_instance
   staging_environment = var.staging_instance
 }
