@@ -54,3 +54,9 @@ variable "staging_instance" {
   type        = string
   description = "The instance of the application running as a staging environment"
 }
+
+# dns zone
+variable "dns_zone" {
+  type    = string
+  default = "svc.account-creation-assistance.eqiad1.wikimedia.cloud."
+}
