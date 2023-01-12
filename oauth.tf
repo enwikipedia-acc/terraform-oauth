@@ -4,6 +4,12 @@ resource "cloudvps_web_proxy" "oauth_proxy" {
   backends = ["http://oauth-prod.${trimsuffix(data.openstack_dns_zone_v2.rootzone.name, ".")}:80"]
 }
 
+resource "cloudvps_web_proxy" "oauth_legacy_proxy" {
+  hostname = local.oauth_proxy_hostname
+  domain   = "wmflabs.org"
+  backends = ["http://oauth-prod.${trimsuffix(data.openstack_dns_zone_v2.rootzone.name, ".")}:80"]
+}
+
 resource "cloudvps_web_proxy" "staging_oauth_proxy" {
   count    = module.bluegreen.staging_count
   hostname = local.oauth_staging_proxy_hostname
