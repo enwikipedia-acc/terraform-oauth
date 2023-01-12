@@ -57,8 +57,9 @@ module "oauth-server-blue" {
 }
 
 module "oauth-server-green" {
-  source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.12.0"
+  # source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
+  # version = "0.12.0"
+  source = "github.com/enwikipedia-acc/terraform-openstack-mediawiki-oauth"
 
   environment = "g"
   count       = module.bluegreen.green_count
