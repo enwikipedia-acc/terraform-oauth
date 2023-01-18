@@ -71,7 +71,7 @@ module "oauth-server-green" {
   environment = "g"
   count       = module.bluegreen.green_count
 
-  database_snapshot_name = "oauth-db-20221228b"
+  database_snapshot_name = "oauth-db-20230117"
   instance_type = data.openstack_compute_flavor_v2.small.id
   image_name    = "debian-11.0-bullseye"
 
