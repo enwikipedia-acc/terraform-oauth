@@ -2,32 +2,32 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/terraform-provider-openstack/openstack" {
-  version     = "1.49.0"
+  version     = "1.52.1"
   constraints = "~> 1.48"
   hashes = [
-    "h1:6I8IFY2JDKc6ntkF3C5w1rgIATpbdmvgWrnV7kcRq5o=",
-    "zh:18b0a5d528fe3eb30060cf478db5a5efaed9d9837f4afb35ba58f0196ba6a51c",
-    "zh:3cd7f28730ed216740a7bc62169a0d630f95ecdaee1162952aab67011fcf8831",
-    "zh:60a827813523fd77e75d0145cd066cb4c2a89453083a5bd9e0712a8423bdc14a",
-    "zh:70a4e4af076ce946943d36cb81c47569d8b30722f2b89768006565a4f512fdbb",
-    "zh:83563688ec5a5435649191f3e80fc96b93571b7333eee12e2d448149f21ba7c5",
-    "zh:9067cba5ef3f89e81f01b7e68989ffce2460c239a697ece2cd08c77c73afaf87",
-    "zh:92589eec7fd057ad5bb00a5c5968eb93d2a4b07380c5be794410349f0188787f",
-    "zh:951db60626bedcd4538b88d284f9b70ef41166dfbdc568ae781518e24be0b077",
-    "zh:9d7340122ae1a7ea5b0e5c469e89ffc43c24f4391fc870b27efe4dba461f8b84",
-    "zh:9f31056e278e8bd0a4b0fbfe5b02a625ee9d072177c36148cde3295adbd4a9d1",
-    "zh:bf7a0beb72d9214fe2a61db76401057462f1133a48f8ce0a666756660d27b2b5",
-    "zh:e44dcadcc0680e7b7af94a8a4dd1e421835497178976604455182dd98d6ffe96",
-    "zh:f5d03f5ada85d41cb94bd7a2b956ca2eb9d7d6cb6d5382bf78a5e641be3eadb0",
-    "zh:fa7134711a60f8518b82c0246f5a72efd24d23e074f3aec4eda90c013c0d23b5",
+    "h1:tzawotEtjBcVWnzA+wAqcbkxW7XnJCfXqod4SBts9vI=",
+    "zh:037f7ab5a0942daee00d23402e7ccab472380864e13013284910fa7841a6e37c",
+    "zh:52ac973e6c5cd584c5086494218e9b49d93217f5fbc34fc76fa8a9ddd635447a",
+    "zh:5acad7b8c7a493fd0b659271743e2853859a4b2669df26f21aecf1b2f60fa706",
+    "zh:5d9218a7f10849f2227fc11df19f78b3b11cccade6b674c314e804f0e98d4368",
+    "zh:91ea6bf80ff706e734300041cf22e946c049abf8dcf1bed899f93f20f7779121",
+    "zh:961d67ebf1116bd539b726ef483f7d67c95351efd09e55fbeb30cd2ca7946a12",
+    "zh:9d3d8ee11cda45804e9b759064fbc9f47d6f54203bd17654236f2f601424b460",
+    "zh:a0af7e5bad6114a7a0ac88cee63e2c14558572e293bebcf651ed8d8d9c20dfda",
+    "zh:a1fd5609f61a43c9c2a403e024042afc3a45fde39935a388009d05105e2d39d3",
+    "zh:bd84aae9f2ac6eb978837ea5994bb24be221e2e4d69a3e8842eef3fcf62594f0",
+    "zh:be690e77aa497ab8bb8ed59f7e03018e96805e2e13df334086a8c5ac4290db09",
+    "zh:c4ee17773e7295b0598e36148ac49b2c61caa6da3f7b02e439aa61ca6486da07",
+    "zh:c871d03abf9c916584dd8fc6b63ed85bbe41208eba684b2175ac741003bf9d25",
+    "zh:f1e5c4a5740ad75b9b37376db4ea0e3067b0c2b6871521bbc6a1625bef137abf",
   ]
 }
 
 provider "terraform.wmcloud.org/registry/cloudvps" {
-  version     = "0.1.3"
-  constraints = "~> 0.1.1, ~> 0.1.3"
+  version     = "0.2.0"
+  constraints = "~> 0.1"
   hashes = [
-    "h1:hmdrfA9YR8lLxjhWrFNVgpx8iHaKFirFqIKDPdIZc2k=",
-    "zh:c907117d4183bfa4a0cd7ec959249ddcbd6ee29801148fd17a32f5983d20d421",
+    "h1:CPDNYDvt4+P0f54xSftacLXhrVRTRJb7+vtXGy2FvgE=",
+    "zh:540d2a24dde3787cd6c84c0a265cb6f7385b86924dcdf363c0236bb2c8a8bd69",
   ]
 }
