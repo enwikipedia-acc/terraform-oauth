@@ -71,7 +71,7 @@ module "oauth-server-green" {
   environment = "g"
   count       = module.bluegreen.green_count
 
-  database_snapshot_name = "accounts-oauth-database-20230704"
+  database_snapshot_name = "accounts-oauth-database-20230704b"
   instance_type = data.openstack_compute_flavor_v2.small.id
   image_name    = "debian-12.0-bookworm"
 
@@ -87,6 +87,6 @@ module "oauth-server-green" {
   ]
 
   proxy_domain    = var.oauth_proxy_domain
-  public_hostname = "${local.oauth_proxy_hostname}.${var.oauth_proxy_domain}"
+  public_hostname = "${local.oauth_staging_proxy_hostname}.${var.oauth_proxy_domain}"
 }
 
