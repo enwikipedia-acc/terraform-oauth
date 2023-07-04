@@ -64,16 +64,16 @@ module "oauth-server-blue" {
 }
 
 module "oauth-server-green" {
-  #source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  #version = "0.13.0"
-  source = "github.com/enwikipedia-acc/terraform-openstack-mediawiki-oauth"
+  source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
+  version = "0.14.0"
+  #source = "github.com/enwikipedia-acc/terraform-openstack-mediawiki-oauth"
 
   environment = "g"
   count       = module.bluegreen.green_count
 
-  database_snapshot_name = "oauth-db-20230117"
+  database_snapshot_name = "accounts-oauth-database-20230704"
   instance_type = data.openstack_compute_flavor_v2.small.id
-  image_name    = "debian-11.0-bullseye"
+  image_name    = "debian-12.0-bookworm"
 
   resource_prefix = local.green_resource_prefix
 
