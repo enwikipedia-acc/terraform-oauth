@@ -11,12 +11,9 @@ terraform {
     }
   }
 
-  cloud {
-    organization = "enwikipedia-acc"
-
-    workspaces {
-      name = "oauth"
-    }
+  backend "s3" {
+    key    = "workload/oauth.tfstate"
+    region = "us-east-1"
   }
 
   required_version = "~> 1.5.0"
