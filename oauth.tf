@@ -26,8 +26,7 @@ resource "openstack_dns_recordset_v2" "prod_instance" {
 }
 
 module "bluegreen" {
-  source  = "app.terraform.io/enwikipedia-acc/bluegreen/openstack"
-  version = "0.2.0"
+  source  = "github.com/enwikipedia-acc/terraform-openstack-bluegreen?ref=0.2.0"
 
   blue_dns_name       = "${local.blue_resource_prefix}.${data.openstack_dns_zone_v2.rootzone.name}"
   green_dns_name      = "${local.green_resource_prefix}.${data.openstack_dns_zone_v2.rootzone.name}"
@@ -36,10 +35,8 @@ module "bluegreen" {
 }
 
 module "oauth-server-blue" {
-  source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.13.0"
-  #source = "github.com/enwikipedia-acc/terraform-openstack-mediawiki-oauth"
-
+  source = "github.com/enwikipedia-acc/terraform-openstack-mediawiki-oauth?ref=0.13.0"
+  
   environment = "b"
   count       = module.bluegreen.blue_count
 
@@ -64,9 +61,7 @@ module "oauth-server-blue" {
 }
 
 module "oauth-server-green" {
-  source  = "app.terraform.io/enwikipedia-acc/mediawiki-oauth/openstack"
-  version = "0.15.0"
-  #source = "github.com/enwikipedia-acc/terraform-openstack-mediawiki-oauth"
+  source = "github.com/enwikipedia-acc/terraform-openstack-mediawiki-oauth?ref=0.15.0"
 
   environment = "g"
   count       = module.bluegreen.green_count
